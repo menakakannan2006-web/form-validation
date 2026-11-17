@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+<body>
+
+    <h2>Registration Form</h2>
+
+    <label>Name:</label>
+    <input type="text" id="name" placeholder="Enter name">
+    <p id="nameError" style="color:red;"></p>
+
+    <label>Email:</label>
+    <input type="text" id="email" placeholder="Enter email">
+    <p id="emailError" style="color:red;"></p>
+
+    <label>Password:</label>
+    <input type="password" id="password" placeholder="Enter password">
+    <p id="passwordError" style="color:red;"></p>
+
+    <button id="submitBtn" onclick="submitForm()" style="display:none;">
+        Submit
+    </button>
+
+    <script>
+        function validateForm() {
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            let valid = true;
+
+            // Name Validation
+            if (name.trim() === "") {
+                document.getElementById("nameError").innerHTML =
+                    "Name field should not be empty!";
+                valid = false;
+            } else {
+                document.getElementById("nameError").innerHTML = "";
+            }
+
+            // Email Validation
+            let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!pattern.test(email)) {
+                document.getElementById("emailError").innerHTML =
+                    "Please enter a valid email address!";
+                valid = false;
+            } else {
+                document.getElementById("emailError").innerHTML = "";
+            }
+
+            // Password Validation
+            if (password.length < 6) {
+                document.getElementById("passwordError").innerHTML =
+                    "Password must contain at least 6 characters!";
+                valid = false;
+            } else {
+                document.getElementById("passwordError").innerHTML = "";
+            }
+
+            // Show Submit Button only if all fields are valid
+            document.getElementById("submitBtn").style.display =
+                valid ? "block" : "none";
+        }
+
+        function submitForm() {
+            alert("Form submitted successfully!");
+        }
+
+        // Validate whenever user types
+        document.getElementById("name").addEventListener("input", validateForm);
+        document.getElementById("email").addEventListener("input", validateForm);
+        document.getElementById("password").addEventListener("input", validateForm);
+
+    </script>
+
+</body>
+</html>
